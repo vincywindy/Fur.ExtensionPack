@@ -13,6 +13,9 @@ namespace Fur
     /// </summary>
     public interface ICreationTime
     {
+        /// <summary>
+        /// 创建时间
+        /// </summary>
         DateTime CreatedTime { get; set; }
     }
 }

@@ -14,6 +14,9 @@ namespace Fur
 
     public interface IUpdateTime
     {
+        /// <summary>
+        /// 更新时间
+        /// </summary>
         DateTime? UpdatedTime { get; set; }
     }
 }

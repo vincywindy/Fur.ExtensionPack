@@ -32,6 +32,13 @@ namespace Fur
         .EntityFromContext(context)
         .AdaptTo(destination);
         }
+        /// <summary>
+        /// 根据数据库查询实体的关系，以进行Mapper
+        /// </summary>
+        /// <typeparam name="TSource"></typeparam>
+        /// <param name="builder"></param>
+        /// <param name="context"></param>
+        /// <returns></returns>
         public static TypeAdapterBuilder<TSource> EntityFromContext<TSource>(this TypeAdapterBuilder<TSource> builder, DbContext context)
         {
             const string dbKey = "Mapster.EFCore.db";
