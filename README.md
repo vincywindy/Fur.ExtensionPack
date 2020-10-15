@@ -18,7 +18,7 @@
 将数据库上下文由继承于`AppDbContext`更改为继承于`AuditingDbContext`
 ```c#
     [AppDbContext("Sqlite3ConnectionString")]
-    public class FurDbContext : AppDbContext<FurDbContext>
+    public class FurDbContext : AuditingDbContext<FurDbContext>//<=AppDbContext<FurDbContext>
     {
         public FurDbContext(DbContextOptions<FurDbContext> options) : base(options)
         {
