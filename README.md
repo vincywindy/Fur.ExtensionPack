@@ -40,6 +40,7 @@
         /// </summary>
         public Person()
         {
+            //此行已经不需要，由系统自动管理
             CreatedTime = DateTime.Now;
             IsDeleted = false;
         }
