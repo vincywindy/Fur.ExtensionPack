@@ -1,17 +1,13 @@
 # Fur.ExtensionPack
-
+[![Build status](https://dev.azure.com/windylulu/Fur.ExtensionPack/_apis/build/status/Fur.ExtensionPack-CI)](https://dev.azure.com/windylulu/Fur.ExtensionPack/_build/latest?definitionId=2)
 #### 介绍
 针对[Fur](http://https://gitee.com/monksoul/Fur)基础功能的实用拓展包
 
-#### 软件架构
-软件架构说明
 
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  nuget Install-Package Fur.ExtensionPack -Version 0.0.8
 
 #### 使用说明
 
