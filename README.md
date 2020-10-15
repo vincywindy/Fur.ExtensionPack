@@ -1,6 +1,6 @@
 # Fur.ExtensionPack
 [![Build status](https://dev.azure.com/windylulu/Fur.ExtensionPack/_apis/build/status/Fur.ExtensionPack-CI)](https://dev.azure.com/windylulu/Fur.ExtensionPack/_build/latest?definitionId=2)
-![Nuget](https://img.shields.io/nuget/v/Fur.ExtensionPack)
+![Nuget (with prereleases)](https://img.shields.io/nuget/vpre/Fur.ExtensionPack)
 #### 介绍
 针对[Fur](http://https://gitee.com/monksoul/Fur)基础功能的实用拓展包
 
