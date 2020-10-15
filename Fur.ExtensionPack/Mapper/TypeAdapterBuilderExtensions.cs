@@ -154,12 +154,11 @@ namespace Fur
                                                     Expression.Block(new[] { db, set }, dbAssign, setAssign, ret),
                                                     arg.MapType == MapType.MapToTarget ? new[] { src, dest } : new[] { src });
                             //这是生成的方法
-                            //                            .Block(
-                            //    Microsoft.EntityFrameworkCore.DbContext $db,
-                            //    Microsoft.EntityFrameworkCore.DbSet`1[Fur.Core.Person] $set) {
+                            //                            .Block(Microsoft.EntityFrameworkCore.DbContext $db,Microsoft.EntityFrameworkCore.DbSet`1[Fur.Core.Person] $set) 
+                            //{
                             //    $db = (Microsoft.EntityFrameworkCore.DbContext)((Mapster.MapContext.Current).Parameters).Item["Mapster.EFCore.db"];
                             //    $set = .Call $db.Set();
-                            //                            (.Call $set.Find(.NewArray System.Object[] {
+                            //                            (.Call $set.Find(.New Array System.Object[] {
                             //                                (System.Object)$var1.Id
                             //                                }) ?? $var2) ?? .New Fur.Core.Person()
                             //}
