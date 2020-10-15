@@ -37,7 +37,7 @@ namespace Fur
         /// <param name="builder"></param>
         /// <param name="context"></param>
         /// <returns></returns>
-        public static TypeAdapterBuilder<TSource> EntityFromContext2<TSource>(this TypeAdapterBuilder<TSource> builder, DbContext context)
+        public static TypeAdapterBuilder<TSource> EntityFromContext<TSource>(this TypeAdapterBuilder<TSource> builder, DbContext context)
         {
             //保存配置参数名，当已经初始化过之后不会再重复执行Config的方法
             const string dbKey = "Mapster.EFCore.db";
