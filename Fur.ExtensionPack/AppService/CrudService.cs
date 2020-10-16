@@ -48,9 +48,10 @@ namespace Fur.ExtensionPack.AppService
         public CrudService()
         {
             Repository = Db.GetRepository<TEntity>();
-            //设置软删除状态
-            IsFakeDelete = typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                        .Any(u => u.IsDefined(typeof(FakeDeleteAttribute), true));
+            //设置软删除状态 主库有bug，所以先不做判断
+            //IsFakeDelete = typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+            //            .Any(u => u.IsDefined(typeof(FakeDeleteAttribute), true));
+            IsFakeDelete = false;
             IsCalculateCount = true;
         }
         /// <summary>
@@ -61,7 +62,7 @@ namespace Fur.ExtensionPack.AppService
         public async virtual Task<TDto> CreateAsync(TCreateDto createDto)
         {
             var newEntity = await Repository.InsertNowAsync(createDto.Adapt<TEntity>());
-            return newEntity.Adapt<TDto>();
+            return newEntity.Entity.Adapt<TDto>();
         }
         /// <summary>
         /// 修改
@@ -73,7 +74,7 @@ namespace Fur.ExtensionPack.AppService
             var inputentity = updateDto.Adapt<TEntity>();
             //为了防止query里面需要load，应此先把条件加上
             var currentity = await CreateEntityQuery(Repository.Entities.Where(d => d.Id.Equals(inputentity.Id))).FirstAsync();
-            var updatedentity = inputentity.AdaptToTrack(currentity);
+            var updatedentity = updateDto.AdaptToTrack(currentity);
             await Repository.SaveNowAsync();
             return updatedentity.Adapt<TDto>();
         }
@@ -92,8 +93,7 @@ namespace Fur.ExtensionPack.AppService
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        [HttpPost]
-        public async virtual Task<PageResultDto<TDto>> GetList(IListInput input)
+        public async virtual Task<PageResultDto<TDto>> GetList([FromQuery] TListInput input)
         {
             var query = CreateFilterQuery(input.Filter);
             query = CreateListQuery(query);
