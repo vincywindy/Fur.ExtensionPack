@@ -198,4 +198,17 @@ namespace Fur.ExtensionPack.AppService
     {
 
     }
+    /// <summary>
+    /// Crud服务
+    /// </summary>
+    /// <typeparam name="TDto">用于查询，创建，更新返回以及进行修改的的Dto</typeparam>
+    /// <typeparam name="TEntity">用于查询的实体</typeparam>
+    /// <typeparam name="TKey">实体的主键</typeparam>
+    [SkipScan]
+    public abstract class CrudService<TDto, TEntity, TKey> : CrudService<TDto, TEntity, TDto, TDto, ListInput, TKey>
+        where TEntity : PrivateEntityBase<TKey>, new()
+        where TKey : struct
+    {
+
+    }
 }
