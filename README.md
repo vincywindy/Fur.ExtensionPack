@@ -8,7 +8,7 @@
 
 #### 安装教程
 
-1.  `nuget Install-Package Fur.ExtensionPack -Version 0.0.8`
+1.  `nuget Install-Package Fur.ExtensionPack`
 
 #### 使用说明
 
