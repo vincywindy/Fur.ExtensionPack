@@ -13,11 +13,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Fur" Version="1.0.0-rc.final.6" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="AppService\" />
+    <PackageReference Include="Fur" Version="1.0.0-rc.final.8" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.2.3" />
   </ItemGroup>
 
   <ItemGroup>

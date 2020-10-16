@@ -13,8 +13,7 @@ namespace Fur.ExtensionPack.Entity
     /// </summary>
     public abstract class StandardUser<TPrimaryKey> : IdentityUser<TPrimaryKey>, ICreationTime, IUpdateTime where TPrimaryKey : IEquatable<TPrimaryKey>
     {
-      
-        
+
         /// <summary>
         /// 用户名
         /// </summary>

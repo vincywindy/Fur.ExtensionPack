@@ -20,14 +20,14 @@ namespace Fur
         /// <summary>
         /// MapperDto到已被追踪的实体
         /// </summary>
-        /// <typeparam name="TSource"></typeparam>
         /// <typeparam name="TDestination"></typeparam>
         /// <param name="source"></param>
-        /// <param name="destination"></param>
+        /// <param name="destination">目标实体</param>
+        /// <param name="dbContext">上下文</param>
         /// <returns></returns>
-        public static TDestination AdaptToTrack<TSource, TDestination>(this TSource source, TDestination destination) where TDestination : class, IPrivateEntity, new()
+        public static TDestination AdaptToTrack<TDestination>(this object source, TDestination destination, DbContext dbContext = null) where TDestination : class, IPrivateEntity, new()
         {
-            var context = Db.GetRepository<TDestination>().DbContext;
+            var context = dbContext ?? Db.GetRepository<TDestination>().DbContext;
             return source.BuildAdapter().EntityFromContext(context).AdaptTo(destination);
         }
         /// <summary>
