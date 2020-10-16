@@ -92,6 +92,7 @@ namespace Fur.ExtensionPack.AppService
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
+        [HttpPost]
         public async virtual Task<PageResultDto<TDto>> GetList(IListInput input)
         {
             var query = CreateFilterQuery(input.Filter);
