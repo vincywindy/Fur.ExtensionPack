@@ -12,11 +12,14 @@
 
   <ItemGroup>
     <PackageReference Include="Fur" Version="1.0.0-rc.final.5" />
-    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="5.0.0-rc.2.20475.17" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="icon.jpg">
+    <Folder Include="AppService\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\icon.jpg">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
