@@ -22,10 +22,10 @@ namespace Fur.ExtensionPack.AppService
         /// <summary>
         /// 跳过记录数
         /// </summary>
-        public int? SkipCount { get; set; }
+        public int SkipCount { get; set; }
         /// <summary>
         /// 最大返回数量
         /// </summary>
-        public int? MaxResultCount { get; set; }
+        public int MaxResultCount { get; set; }
     }
 }
