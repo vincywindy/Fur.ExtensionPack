@@ -27,7 +27,7 @@ namespace Fur.ExtensionPack.AppService
     [SkipScan]
     public abstract class CrudService<TDto, TEntity, TCreateDto, TUpdateDto, TListInput, TKey>
         where TEntity : PrivateEntityBase<TKey>, new()
-        where TKey : struct
+        where TDto : IDtoBase<TKey>
         where TListInput : IListInput
     {
         /// <summary>
@@ -49,9 +49,8 @@ namespace Fur.ExtensionPack.AppService
         {
             Repository = Db.GetRepository<TEntity>();
             //设置软删除状态 主库有bug，所以先不做判断
-            //IsFakeDelete = typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance)
-            //            .Any(u => u.IsDefined(typeof(FakeDeleteAttribute), true));
-            IsFakeDelete = false;
+            IsFakeDelete = typeof(TEntity).GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                        .Any(u => u.IsDefined(typeof(FakeDeleteAttribute), true));
             IsCalculateCount = true;
         }
         /// <summary>
@@ -179,7 +178,7 @@ namespace Fur.ExtensionPack.AppService
     [SkipScan]
     public abstract class CrudService<TDto, TEntity, TCreateDto, TListInput, TKey> : CrudService<TDto, TEntity, TCreateDto, TDto, TListInput, TKey>
         where TEntity : PrivateEntityBase<TKey>, new()
-        where TKey : struct
+        where TDto : IDtoBase<TKey>
         where TListInput : IListInput
     {
 
@@ -194,7 +193,7 @@ namespace Fur.ExtensionPack.AppService
     [SkipScan]
     public abstract class CrudService<TDto, TEntity, TListInput, TKey> : CrudService<TDto, TEntity, TDto, TDto, TListInput, TKey>
         where TEntity : PrivateEntityBase<TKey>, new()
-        where TKey : struct
+        where TDto : IDtoBase<TKey>
         where TListInput : IListInput
     {
 
@@ -208,7 +207,19 @@ namespace Fur.ExtensionPack.AppService
     [SkipScan]
     public abstract class CrudService<TDto, TEntity, TKey> : CrudService<TDto, TEntity, TDto, TDto, ListInput, TKey>
         where TEntity : PrivateEntityBase<TKey>, new()
-        where TKey : struct
+        where TDto : IDtoBase<TKey>
+    {
+
+    }
+    /// <summary>
+    /// Crud服务
+    /// </summary>
+    /// <typeparam name="TDto">用于查询，创建，更新返回以及进行修改的的Dto</typeparam>
+    /// <typeparam name="TEntity">用于查询的实体</typeparam>
+    [SkipScan]
+    public abstract class CrudService<TDto, TEntity> : CrudService<TDto, TEntity, TDto, TDto, ListInput, int>
+        where TEntity : PrivateEntityBase<int>, new()
+        where TDto : IDtoBase<int>
     {
 
     }

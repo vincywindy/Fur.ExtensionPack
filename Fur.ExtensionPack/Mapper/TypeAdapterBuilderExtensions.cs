@@ -59,7 +59,7 @@ namespace Fur
                         var settings = config.When((srcType, destType, mapType) => destType == type);
                         settings.Settings.ConstructUsingFactory = arg =>
                         {
-                            //指定参数，表示Dto
+                            //声明一个变量，类型是Dto
                             //$var1
                             var src = Expression.Parameter(arg.SourceType);
                             //判断调用的是xx.AdaptTo()还是xx.AdaptTo(aa),前者表示Map到一个新的对象，这个不需要我们进行处理，后者表示Map到已有的一个实体,然后指定参数，表示对应实体
