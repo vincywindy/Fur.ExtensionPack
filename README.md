@@ -76,13 +76,13 @@ public async Task Update(PersonInputDto input)
 
     }
 ```
-CurdService所有方法都是虚方法，您可以随意覆写，并且包含了一些配置可以设置：
-IsFakeDelete：是否为软删除，告诉Delete接口，删除是软删除还是硬删除，默认值根据传入的实体是否带有[FakeDelete]特性来判断。
-IsCalculateCount：调用List接口的时候，是否统计查找到结果数，由于此操作会调用Count来计算，因此可能会延长返回时间，默认为True
-除了CreateAsync，UpdateAsync，Find，List，DeleteAsync的方法覆写外，还支持以下方法覆写：
-CreateFilterQuery：此接口时用于生成Where表达式用的，默认使用的是System.Linq.Dynamic.Core，你也可以改成你自己的实现。
-CreateEntityQuery：在Update和Get方法的时候，对实体Query进行额外的操作，比如添加Include，Join等操作，请注意传入的Query参数已经添加了Where的筛选条件，应此对应复杂的Include需要Load来分段加载也不用担心性能。
-CreateListQuery：在使用List方法的时候，对实体Query进行额外的操作，比如添加Include，Join等操作，请注意传入的Query参数已经添加了Where的筛选条件，应此对应复杂的Include需要Load来分段加载也不用担心性能。
+CurdService所有方法都是虚方法，您可以随意覆写，并且包含了一些配置可以设置：<br/>
+IsFakeDelete：是否为软删除，告诉Delete接口，删除是软删除还是硬删除，默认值根据传入的实体是否带有[FakeDelete]特性来判断。<br/>
+IsCalculateCount：调用List接口的时候，是否统计查找到结果数，由于此操作会调用Count来计算，因此可能会延长返回时间，默认为True。<br/>
+除了CreateAsync，UpdateAsync，Find，List，DeleteAsync的方法覆写外，还支持以下方法覆写：<br/>
+CreateFilterQuery：此接口时用于生成Where表达式用的，默认使用的是System.Linq.Dynamic.Core，你也可以改成你自己的实现。<br/>
+CreateEntityQuery：在Update和Get方法的时候，对实体Query进行额外的操作，比如添加Include，Join等操作，请注意传入的Query参数已经添加了Where的筛选条件，应此对应复杂的Include需要Load来分段加载也不用担心性能。<br/>
+CreateListQuery：在使用List方法的时候，对实体Query进行额外的操作，比如添加Include，Join等操作，请注意传入的Query参数已经添加了Where的筛选条件，应此对应复杂的Include需要Load来分段加载也不用担心性能。<br/>
 #### 参与贡献
 
 1.  Fork 本仓库
