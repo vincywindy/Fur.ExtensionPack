@@ -10,6 +10,7 @@
     <PackageIcon>icon.jpg</PackageIcon>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <Version>1.0.7</Version>
   </PropertyGroup>
 
   <ItemGroup>
