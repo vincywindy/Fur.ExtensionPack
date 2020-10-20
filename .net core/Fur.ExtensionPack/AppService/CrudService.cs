@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Linq.Dynamic.Core;
 using Microsoft.AspNetCore.Mvc;
 using Fur.ExtensionPack.AppService.Dto;
+using Fur.DynamicApiController;
 
 namespace Fur.ExtensionPack.AppService
 {
@@ -29,6 +30,7 @@ namespace Fur.ExtensionPack.AppService
         where TEntity : PrivateEntityBase<TKey>, new()
         where TDto : IDtoBase<TKey>
         where TListInput : IListInput
+        where TUpdateDto : IDtoBase<TKey>
     {
         /// <summary>
         /// 删除时候是否使用软删除，默认清空下，如果实体带有软删除标记，那么就是软删除，如果没有，那就不是软删除
@@ -58,6 +60,7 @@ namespace Fur.ExtensionPack.AppService
         /// </summary>
         /// <param name="createDto"></param>
         /// <returns></returns>
+
         public async virtual Task<TDto> CreateAsync(TCreateDto createDto)
         {
             var newEntity = await Repository.InsertNowAsync(createDto.Adapt<TEntity>());
@@ -68,11 +71,11 @@ namespace Fur.ExtensionPack.AppService
         /// </summary>
         /// <param name="updateDto"></param>
         /// <returns></returns>
+
         public async virtual Task<TDto> UpdateAsync(TUpdateDto updateDto)
         {
-            var inputentity = updateDto.Adapt<TEntity>();
             //为了防止query里面需要load，应此先把条件加上
-            var currentity = await CreateEntityQuery(Repository.Entities.Where(d => d.Id.Equals(inputentity.Id))).FirstAsync();
+            var currentity = await CreateEntityQuery(Repository.Entities.Where(d => d.Id.Equals(updateDto.Id))).FirstAsync();
             var updatedentity = updateDto.AdaptToTrack(currentity);
             await Repository.SaveNowAsync();
             return updatedentity.Adapt<TDto>();
@@ -82,7 +85,9 @@ namespace Fur.ExtensionPack.AppService
         /// </summary>
         /// <param name="Id"></param>
         /// <returns></returns>
-        public async virtual Task<TDto> FindOne(TKey Id)
+
+
+        public async virtual Task<TDto> Find(TKey Id)
         {
             var currentity = await CreateEntityQuery(Repository.Entities.Where(d => d.Id.Equals(Id))).FirstAsync();
             return currentity.Adapt<TDto>();
@@ -92,7 +97,9 @@ namespace Fur.ExtensionPack.AppService
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public async virtual Task<PageResultDto<TDto>> GetList([FromQuery] TListInput input)
+
+        [ApiDescriptionSettings(KeepName = true)]
+        public async virtual Task<PageResultDto<TDto>> List(TListInput input)
         {
             var query = CreateFilterQuery(input.Filter);
             query = CreateListQuery(query);
@@ -205,7 +212,7 @@ namespace Fur.ExtensionPack.AppService
     /// <typeparam name="TEntity">用于查询的实体</typeparam>
     /// <typeparam name="TKey">实体的主键</typeparam>
     [SkipScan]
-    public abstract class CrudService<TDto, TEntity, TKey> : CrudService<TDto, TEntity, TDto, TDto, ListInput, TKey>
+    public abstract class CrudService<TDto, TEntity, TKey> : CrudService<TDto, TEntity, ListInput, TKey>
         where TEntity : PrivateEntityBase<TKey>, new()
         where TDto : IDtoBase<TKey>
     {
@@ -217,7 +224,7 @@ namespace Fur.ExtensionPack.AppService
     /// <typeparam name="TDto">用于查询，创建，更新返回以及进行修改的的Dto</typeparam>
     /// <typeparam name="TEntity">用于查询的实体</typeparam>
     [SkipScan]
-    public abstract class CrudService<TDto, TEntity> : CrudService<TDto, TEntity, TDto, TDto, ListInput, int>
+    public abstract class CrudService<TDto, TEntity> : CrudService<TDto, TEntity, int>
         where TEntity : PrivateEntityBase<int>, new()
         where TDto : IDtoBase<int>
     {
